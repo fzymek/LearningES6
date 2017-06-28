@@ -31,4 +31,4 @@ var isDog = function(animal) {
 var dogs = animals.filter(isDog)
 
 //print results by mapping each 'dog' object to its name using 'arrow function'
-debug("There are "+ dogs.length + " dogs: " + dogs.map((dog) => {return dog.name}).join(", ") + ".")
+debug("There are "+ dogs.length + " dogs: " + dogs.map((dog) => dog.name).join(", ") + ".")

@@ -1,0 +1,6 @@
+Houston Rockets,Chris Paul,183,PG
+Houston Rockets,James Harden,196,PG/SG
+Washington Wizards,John Wall,193,PG
+Boston Celtics,Isaiah Thomas,175,PG
+Boston Celtics,Avery Bradley,188,PG/SG
+Washington Wizards,Marcin Gortat,211,C

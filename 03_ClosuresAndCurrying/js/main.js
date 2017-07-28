@@ -1,4 +1,5 @@
 //@flow
+import fs from 'fs'
 
 //////////// Example 1
 var name = 'Filip'
@@ -51,3 +52,61 @@ console.log('2 * 5 =',doubler(5))
 
 console.log('3 * 2 =',tripler(2))
 console.log('3 * 5 =',tripler(5))
+
+
+/////////////// Example 5
+
+//declaration of cuuryable function
+let champions =
+    team =>
+        year =>
+            loosers =>
+                team + ' have won NBA Championship in ' +
+                year + ' by beating ' +
+                loosers + '.'
+
+
+let gsw = champions("Golden State Warriors")
+let champs = gsw(2017)
+console.log(champs("Cleveland Cavaliers"))
+
+
+
+/////////////// Example 6
+
+//read roster data
+var data = fs.readFileSync('../02_Map_Reduce/data/data.txt', 'utf8')//.trim() //remove empty line
+
+var rosters = data.split('\n')
+  .filter(line => line.length > 0)                //can use trim instead
+  .map(line => line.split(','))                   //convert line to array of csv values
+  .reduce((roster, player) => {
+    roster[player[0]] = roster[player[0]] || []   //create empty array or reuse exising
+    roster[player[0]].push({                      //add new player to team roster
+      name: player[1],
+      height: player[2],
+      position: player[3]
+    })
+    return roster
+  }, {})
+
+// console.log(rosters)
+
+
+//create curryable function that checks if player is playing on specified position
+let isPlayingOnPosition =
+    position =>
+        player => player.position === position
+
+let pointguards = isPlayingOnPosition('PG')
+let centers = isPlayingOnPosition('C')
+
+for (var team in rosters) {
+    //use created curryable funcion in filter operator
+    console.log('Point guards in ' + team + ': ' + JSON.stringify(rosters[team].filter(pointguards, null, 4)))
+}
+
+for (var team in rosters) {
+    //use created curryable funcion in filter operator
+    console.log('Centers in ' + team + ': ' + JSON.stringify(rosters[team].filter(centers, null, 4)))
+}
